@@ -4,11 +4,9 @@ public class PlayerMove : MonoBehaviour
 {
     public int HP = 30;
     public float speed = 10f;
-    public float JumpPower = 10f;
+    public float jumpPower = 10f;
 
     private Rigidbody2D rb;
-    private Vector2 move;
-
     private bool isLadder = false;
     private float defaultGravity;
 
@@ -21,31 +19,27 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         float moveX = 0f;
-        float moveY = 0f;
+        float moveY = rb.linearVelocity.y;
 
-        // ‰¡ˆÚ“®
+        // ï¿½ï¿½ï¿½Ú“ï¿½
         if (Input.GetKey(KeyCode.D)) moveX = 1f;
         if (Input.GetKey(KeyCode.A)) moveX = -1f;
 
-        // ƒWƒƒƒ“ƒvi’òq’†‚Í•s‰Âj
+        // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½iï¿½ï¿½qï¿½ï¿½ï¿½Í•sï¿½Âj
         if (!isLadder && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
+            moveY = jumpPower;
         }
 
-        // ’òqˆÚ“®
+        // ï¿½ï¿½qï¿½Ú“ï¿½
         if (isLadder)
         {
-            if (Input.GetKey(KeyCode.W)) moveY = 1f;
-            if (Input.GetKey(KeyCode.S)) moveY = -1f;
+            moveY = 0f;
+            if (Input.GetKey(KeyCode.W)) moveY = speed;
+            if (Input.GetKey(KeyCode.S)) moveY = -speed;
         }
 
-        move = new Vector2(moveX, moveY).normalized;
-    }
-
-    void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(moveX * speed, moveY);
     }
 
     void OnTriggerEnter2D(Collider2D col)
