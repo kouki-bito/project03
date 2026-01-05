@@ -1,5 +1,8 @@
 using UnityEngine;
 
+
+
+//状態の遷移はAnimatorの中の矢印。
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -15,11 +18,14 @@ public class PlayerMove : MonoBehaviour
     private Collider2D collider2D;
 
     SpriteRenderer sprite;
+    private Animator anim;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         defaultGravity = rb.gravityScale;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -35,7 +41,8 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        float x = 0f;
+        // 入力取得（A/D）
+        float x = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetKey(KeyCode.A))
             x = -1f;
@@ -43,6 +50,22 @@ public class PlayerMove : MonoBehaviour
             x = 1f;
 
         rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
+
+        if(x != 0)
+        {
+            anim.SetBool("isRunning", true);
+
+            // 向き変更
+            transform.localScale = new Vector3(
+                Mathf.Sign(x), 1, 1
+            );
+        }
+
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
+
     }
 
     void Jump()

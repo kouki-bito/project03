@@ -131,9 +131,9 @@ GameObject:
   - component: {fileID: 40769594}
   - component: {fileID: 40769596}
   - component: {fileID: 40769598}
-  - component: {fileID: 40769599}
   - component: {fileID: 40769600}
   - component: {fileID: 40769601}
+  - component: {fileID: 40769602}
   m_Layer: 0
   m_Name: "\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7\u30D7\u30EC\u30A4\u30E4\u30FC"
   m_TagString: Untagged
@@ -193,7 +193,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.6, y: 1.6}
+  m_Size: {x: 2.2, y: 2.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -254,7 +254,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 2.4}
-    newSize: {x: 1.6, y: 1.6}
+    newSize: {x: 2.2, y: 2.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -288,22 +288,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &40769599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40769593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d00c07151e91b44285e4d5d60de9346, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  moveSpeed: 5
-  jumpPower: 7
-  climbSpeed: 4
-  HP: 30
 --- !u!1839735485 &40769600
 Tilemap:
   m_ObjectHideFlags: 0
@@ -364,6 +348,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &40769602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40769593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d00c07151e91b44285e4d5d60de9346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  moveSpeed: 5
+  jumpPower: 7
+  climbSpeed: 4
+  HP: 30
 --- !u!1 &181238406
 GameObject:
   m_ObjectHideFlags: 0
