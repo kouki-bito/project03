@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
     private bool isOnLadder;
     private Collider2D collider2D;
 
+    SpriteRenderer sprite;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
