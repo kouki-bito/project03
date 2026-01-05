@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public int HP = 30;
-    public float speed = 10f;
-    public float jumpPower = 10f;
+    public float moveSpeed = 5f;
+    public float jumpPower = 7f;
+    public float climbSpeed = 4f;
+    public float HP = 30;
 
     private Rigidbody2D rb;
-    private bool isLadder = false;
+    private bool isGrounded;
+    private bool isClimbing;
     private float defaultGravity;
+    private bool isOnLadder;
+    private Collider2D collider2D;
 
     void Start()
     {
@@ -18,45 +22,93 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        float moveX = 0f;
-        float moveY = rb.linearVelocity.y;
+        Move();
+        Jump();
+        Climb();
 
-        // ���ړ�
-        if (Input.GetKey(KeyCode.D)) moveX = 1f;
-        if (Input.GetKey(KeyCode.A)) moveX = -1f;
 
-        // �W�����v�i��q���͕s�j
-        if (!isLadder && Input.GetKeyDown(KeyCode.Space))
-        {
-            moveY = jumpPower;
-        }
+        
 
-        // ��q�ړ�
-        if (isLadder)
-        {
-            moveY = 0f;
-            if (Input.GetKey(KeyCode.W)) moveY = speed;
-            if (Input.GetKey(KeyCode.S)) moveY = -speed;
-        }
-
-        rb.linearVelocity = new Vector2(moveX * speed, moveY);
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void Move()
     {
-        if (col.CompareTag("ladder"))
+        float x = 0f;
+
+        if (Input.GetKey(KeyCode.A))
+            x = -1f;
+        if (Input.GetKey(KeyCode.D))
+            x = 1f;
+
+        rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
+    }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isClimbing)
         {
-            isLadder = true;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            isGrounded = false; // ← 1回ジャンプ制御
+        }
+    }
+
+    void Climb()
+    {
+        // 梯子に触れていて、上下キーを押したら登り状態にする
+        if (isOnLadder && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
+        {
+            isClimbing = true;
+            rb.gravityScale = 0f;
+        }
+
+        if (isClimbing)
+        {
+            float y = 0f;
+
+            if (Input.GetKey(KeyCode.W))
+                y = 1f;
+            if (Input.GetKey(KeyCode.S))
+                y = -1f;
+
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, y * climbSpeed);
+        }
+    }
+
+    // 地面判定
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isClimbing = true;
             rb.gravityScale = 0f;
             rb.linearVelocity = Vector2.zero;
+            isOnLadder = true;
+        }
+
+        if (collision.CompareTag("Toge")) 
+        {
+            HP -= 5;
         }
     }
 
-    void OnTriggerExit2D(Collider2D col)
+   
+    void OnTriggerExit2D(Collider2D collision)
     {
-        if (col.CompareTag("ladder"))
+        if (collision.CompareTag("Ladder"))
         {
-            isLadder = false;
+            isClimbing = false;
+            rb.gravityScale = defaultGravity;
+            isOnLadder = false;
+            isClimbing = false;
             rb.gravityScale = defaultGravity;
         }
     }

@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 3
   tags:
   - ladder
+  - Ground
+  - Ladder
+  - Toge
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ladder
   - Water
   - UI
   - 
