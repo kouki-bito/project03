@@ -15,11 +15,13 @@ public class PlayerMove : MonoBehaviour
     private bool isClimbing;
     private float defaultGravity;
     private bool isOnLadder;
-    private Collider2D collider2D;
+   // private Collider2D collider2D;
 
     SpriteRenderer sprite;
     private Animator anim;
 
+    //public GameObject bulletPrefab; // インスペクターで弾のプレハブを割り当て
+    //public Transform firePoint;    // 弾の発射位置（銃口など）
 
     void Start()
     {
@@ -33,9 +35,7 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         Climb();
-
-
-        
+        //Shoot();
 
     }
 
@@ -98,6 +98,20 @@ public class PlayerMove : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, y * climbSpeed);
         }
     }
+
+
+
+
+    //void Shoot()
+    //{
+    //    GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+    //    PlayerBullet bulletScript = bulletObj.GetComponent<PlayerBullet>();
+
+    //    // プレイヤーのlocalScale.xが正なら右向き、負なら左向きと判定
+    //    bool isRight = transform.localScale.x > 0;
+
+    //    bulletScript.Launch(isRight);
+    //}
 
     // 地面判定
     void OnCollisionEnter2D(Collision2D collision)
