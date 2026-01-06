@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Ladder
   - Toge
+  - 'PlayerBullet '
   layers:
   - Default
   - TransparentFX
