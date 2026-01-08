@@ -1,4 +1,8 @@
+//using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
 
 
 
@@ -9,12 +13,14 @@ public class PlayerMove : MonoBehaviour
     public float jumpPower = 7f;
     public float climbSpeed = 4f;
     public float HP = 30;
+    public float MaxHP;
 
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool isClimbing;
     private float defaultGravity;
     private bool isOnLadder;
+    public Image HPBar;
    // private Collider2D collider2D;
 
     SpriteRenderer sprite;
@@ -25,6 +31,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        MaxHP = HP;
         rb = GetComponent<Rigidbody2D>();
         defaultGravity = rb.gravityScale;
         anim = GetComponent<Animator>();
@@ -74,7 +81,9 @@ public class PlayerMove : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
             isGrounded = false; // ← 1回ジャンプ制御
+            anim.SetBool("isJumping00", true);
         }
+        else anim.SetBool("isJumping00", false);
     }
 
     void Climb()
@@ -96,7 +105,9 @@ public class PlayerMove : MonoBehaviour
                 y = -1f;
 
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, y * climbSpeed);
+            anim.SetBool("isClimbing", true);
         }
+        else anim.SetBool("isClimbing",false);
     }
 
 
@@ -120,6 +131,14 @@ public class PlayerMove : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        if (collision.gameObject.tag == "Toge")
+        {
+            HP -= 5;
+            HPBar.fillAmount = HP / MaxHP;
+            anim.SetBool("isDamage", true);
+        }
+        else if (!(collision.gameObject.tag == "Toge")) anim.SetBool("isDamage", false);
     }
 
     
@@ -133,10 +152,7 @@ public class PlayerMove : MonoBehaviour
             isOnLadder = true;
         }
 
-        if (collision.CompareTag("Toge")) 
-        {
-            HP -= 5;
-        }
+      
     }
 
    
