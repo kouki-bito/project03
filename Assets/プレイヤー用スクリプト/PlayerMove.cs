@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 
 
@@ -14,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public float climbSpeed = 4f;
     public float HP = 30;
     public float MaxHP;
+    public float damageInterval = 2f;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -21,7 +23,9 @@ public class PlayerMove : MonoBehaviour
     private float defaultGravity;
     private bool isOnLadder;
     public Image HPBar;
-   // private Collider2D collider2D;
+    private bool isTouchingToge = false;
+    private bool isDamageCooldown = false;
+    // private Collider2D collider2D;
 
     SpriteRenderer sprite;
     private Animator anim;
@@ -134,11 +138,16 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.tag == "Toge")
         {
-            HP -= 5;
-            HPBar.fillAmount = HP / MaxHP;
-            anim.SetBool("isDamage", true);
+            isTouchingToge = true;
+            if (!isDamageCooldown)
+            {
+                StartCoroutine(DamageLoop());
+                HPBar.fillAmount = HP / MaxHP;
+                anim.SetBool("isDamage", true);
+            }
+           
         }
-        else if (!(collision.gameObject.tag == "Toge")) anim.SetBool("isDamage", false);
+       // else if (!(collision.gameObject.tag == "Toge")) anim.SetBool("isDamage", false);
     }
 
     
@@ -166,5 +175,35 @@ public class PlayerMove : MonoBehaviour
             isClimbing = false;
             rb.gravityScale = defaultGravity;
         }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Toge"))
+        {
+            isTouchingToge = false;
+            anim.SetBool("IsDamage",false);
+        }
+
+        if (!(collision.gameObject.tag == "Toge")) anim.SetBool("isDamage", false);
+    }
+
+    IEnumerator DamageLoop()
+    {
+        isDamageCooldown = true;
+
+        while (isTouchingToge)
+        {
+            TakeDamage();
+            yield return new WaitForSeconds(damageInterval);
+        }
+
+        isDamageCooldown = false;
+    }
+
+    void TakeDamage() 
+    {
+        HP -= 5;
+        anim.SetBool("isDamage",true);
     }
 }

@@ -365,6 +365,7 @@ MonoBehaviour:
   climbSpeed: 4
   HP: 30
   MaxHP: 0
+  damageInterval: 2
   HPBar: {fileID: 1968745224}
 --- !u!1 &181238406
 GameObject:
