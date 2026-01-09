@@ -10,8 +10,8 @@ using System.Collections;
 //状態の遷移はAnimatorの中の矢印。
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpPower = 7f;
+    public float moveSpeed = 10f;
+    public float jumpPower = 10f;
     public float climbSpeed = 4f;
     public float HP = 30;
     public float MaxHP;
@@ -23,8 +23,10 @@ public class PlayerMove : MonoBehaviour
     private float defaultGravity;
     private bool isOnLadder;
     public Image HPBar;
-    private bool isTouchingToge = false;
+    private bool isDamage = false;
     private bool isDamageCooldown = false;
+    private bool isTouchingToge = false;
+    private Coroutine damageCoroutine;
     // private Collider2D collider2D;
 
     SpriteRenderer sprite;
@@ -46,6 +48,7 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         Climb();
+         
         //Shoot();
 
     }
@@ -95,12 +98,8 @@ public class PlayerMove : MonoBehaviour
         // 梯子に触れていて、上下キーを押したら登り状態にする
         if (isOnLadder && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
         {
-            isClimbing = true;
+            //isClimbing = true;
             rb.gravityScale = 0f;
-        }
-
-        if (isClimbing)
-        {
             float y = 0f;
 
             if (Input.GetKey(KeyCode.W))
@@ -111,9 +110,31 @@ public class PlayerMove : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, y * climbSpeed);
             anim.SetBool("isClimbing", true);
         }
+
         else anim.SetBool("isClimbing",false);
     }
 
+    void TogeDamage() 
+    {
+        HP -= 5;
+        HP = Mathf.Max(HP, 0); // HPが0未満にならない
+        HPBar.fillAmount = HP / MaxHP;
+        anim.SetBool("isDamage", true);
+
+    }
+
+    IEnumerator DamageLoop() 
+    {
+        TogeDamage();
+        while (isTouchingToge)
+        {
+            yield return new WaitForSeconds(damageInterval);
+
+            if (isTouchingToge) TogeDamage();
+            //else anim.SetBool("isDamage",false);
+            
+           }
+    }
 
 
 
@@ -136,21 +157,11 @@ public class PlayerMove : MonoBehaviour
             isGrounded = true;
         }
 
-        if (collision.gameObject.tag == "Toge")
-        {
-            isTouchingToge = true;
-            if (!isDamageCooldown)
-            {
-                StartCoroutine(DamageLoop());
-                HPBar.fillAmount = HP / MaxHP;
-                anim.SetBool("isDamage", true);
-            }
-           
-        }
+        
        // else if (!(collision.gameObject.tag == "Toge")) anim.SetBool("isDamage", false);
     }
 
-    
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
@@ -161,10 +172,19 @@ public class PlayerMove : MonoBehaviour
             isOnLadder = true;
         }
 
-      
+        if (collision.CompareTag("Toge"))
+        {
+            isTouchingToge = true;
+
+            if (damageCoroutine == null)
+            {
+                damageCoroutine = StartCoroutine(DamageLoop());
+            }
+        }
     }
 
-   
+
+
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
@@ -172,38 +192,28 @@ public class PlayerMove : MonoBehaviour
             isClimbing = false;
             rb.gravityScale = defaultGravity;
             isOnLadder = false;
-            isClimbing = false;
-            rb.gravityScale = defaultGravity;
+        }
+
+        if (collision.CompareTag("Toge"))
+        {
+            isTouchingToge = false;
+            anim.SetBool("isDamage", false);
+
+            if (damageCoroutine != null)
+            {
+                StopCoroutine(damageCoroutine);
+                damageCoroutine = null;
+            }
         }
     }
+
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Toge"))
-        {
-            isTouchingToge = false;
-            anim.SetBool("IsDamage",false);
-        }
-
-        if (!(collision.gameObject.tag == "Toge")) anim.SetBool("isDamage", false);
+    
     }
 
-    IEnumerator DamageLoop()
-    {
-        isDamageCooldown = true;
+   
 
-        while (isTouchingToge)
-        {
-            TakeDamage();
-            yield return new WaitForSeconds(damageInterval);
-        }
-
-        isDamageCooldown = false;
-    }
-
-    void TakeDamage() 
-    {
-        HP -= 5;
-        anim.SetBool("isDamage",true);
-    }
+    
 }
