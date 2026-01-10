@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 
 
 
@@ -55,8 +55,11 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         Climb();
-         
+
+        if (this.HP <= 0) 
+        { 
         
+        }
 
     }
 
@@ -151,7 +154,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return)) 
         {
             audioSource.PlayOneShot(FiringSound);
-
+            
         }
     }
 
