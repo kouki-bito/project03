@@ -32,6 +32,12 @@ public class PlayerMove : MonoBehaviour
     SpriteRenderer sprite;
     private Animator anim;
 
+    //武器関係
+    public GameObject Bullet;
+    public float BulletSpeed = 50;
+    AudioSource audioSource;
+    public AudioClip FiringSound;
+
     //public GameObject bulletPrefab; // インスペクターで弾のプレハブを割り当て
     //public Transform firePoint;    // 弾の発射位置（銃口など）
 
@@ -41,6 +47,7 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         defaultGravity = rb.gravityScale;
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -49,7 +56,7 @@ public class PlayerMove : MonoBehaviour
         Jump();
         Climb();
          
-        //Shoot();
+        
 
     }
 
@@ -136,18 +143,19 @@ public class PlayerMove : MonoBehaviour
            }
     }
 
+    void Shoot() 
+    {
 
 
-    //void Shoot()
-    //{
-    //    GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-    //    PlayerBullet bulletScript = bulletObj.GetComponent<PlayerBullet>();
+       
+        if (Input.GetKeyDown(KeyCode.Return)) 
+        {
+            audioSource.PlayOneShot(FiringSound);
 
-    //    // プレイヤーのlocalScale.xが正なら右向き、負なら左向きと判定
-    //    bool isRight = transform.localScale.x > 0;
+        }
+    }
 
-    //    bulletScript.Launch(isRight);
-    //}
+    
 
     // 地面判定
     void OnCollisionEnter2D(Collision2D collision)
