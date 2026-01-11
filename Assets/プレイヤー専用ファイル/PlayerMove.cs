@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     public float HP = 30;
     public float MaxHP;
     public float damageInterval = 2f;
+    public Collider2D collider2D;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -29,7 +30,7 @@ public class PlayerMove : MonoBehaviour
     private bool isDamageCooldown = false;
     private bool isTouchingToge = false;
     private Coroutine damageCoroutine;
-    // private Collider2D collider2D;
+    
 
     SpriteRenderer sprite;
     private Animator anim;
@@ -39,6 +40,8 @@ public class PlayerMove : MonoBehaviour
     public float BulletSpeed = 50;
     AudioSource audioSource;
     public AudioClip FiringSound;
+
+    
 
     //public GameObject bulletPrefab; // インスペクターで弾のプレハブを割り当て
     //public Transform firePoint;    // 弾の発射位置（銃口など）
@@ -51,6 +54,7 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         FiringSound = GetComponent<AudioClip>();
+        collider2D = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -65,10 +69,17 @@ public class PlayerMove : MonoBehaviour
             SceneManager.LoadScene("GameOver");
         }
 
+        
+
+
     }
 
     void Move()
     {
+
+        HP = Mathf.Max(HP, 0); // HPが0未満にならない
+        HPBar.fillAmount = HP / MaxHP;
+        if (HP >= MaxHP) HP = MaxHP;
         // 入力取得（A/D）
         float x = Input.GetAxisRaw("Horizontal");
 
@@ -93,6 +104,8 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("isRunning", false);
         }
+
+        
 
     }
 
@@ -132,7 +145,7 @@ public class PlayerMove : MonoBehaviour
     {
         HP -= 5;
         HP = Mathf.Max(HP, 0); // HPが0未満にならない
-        HPBar.fillAmount = HP / MaxHP;
+       // HPBar.fillAmount = HP / MaxHP;
         anim.SetBool("isDamage", true);
 
     }
@@ -151,7 +164,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Shot() 
-    {       if (Input.GetKeyDown(KeyCode.Return)) 
+    {       if (Input.GetKeyDown(KeyCode.J)) 
         {
             audioSource.PlayOneShot(FiringSound);
             
@@ -159,14 +172,7 @@ public class PlayerMove : MonoBehaviour
     }
 
 
-    void GoldenPower() 
-    {
-        HP = MaxHP;
-        if (HP >= MaxHP) HP = MaxHP;
-        jumpPower *= 2;
-        moveSpeed *= 2;
-        AttackPower *= 2;
-    }
+   
 
 
 
@@ -203,17 +209,22 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (collision.CompareTag("Apple")) 
+        if (collision.CompareTag("Apple"))
         {
-            if (HP < MaxHP) HP += 8;
+            if (HP < MaxHP) HP += 10;
             Destroy(collision.gameObject);
-            if (HP >= MaxHP) HP = MaxHP;
+
+
         }
 
         if (collision.CompareTag("GoldenApple")) 
         { 
-        
+            HP = MaxHP;
+            Destroy(collision.gameObject);
         }
+
+     
+
     }
 
 

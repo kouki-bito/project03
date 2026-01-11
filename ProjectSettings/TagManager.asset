@@ -11,6 +11,7 @@ TagManager:
   - 'PlayerBullet '
   - Apple
   - GoldenApple
+  - Enemy
   layers:
   - Default
   - TransparentFX
