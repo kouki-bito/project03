@@ -9,6 +9,8 @@ TagManager:
   - Ladder
   - Toge
   - 'PlayerBullet '
+  - Apple
+  - GoldenApple
   layers:
   - Default
   - TransparentFX

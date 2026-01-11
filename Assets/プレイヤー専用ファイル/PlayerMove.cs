@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 
 
 
+
 //状態の遷移はAnimatorの中の矢印。
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public float jumpPower = 10f;
+    public float AttackPower = 10f;
     public float climbSpeed = 4f;
     public float HP = 30;
     public float MaxHP;
@@ -48,6 +50,7 @@ public class PlayerMove : MonoBehaviour
         defaultGravity = rb.gravityScale;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        FiringSound = GetComponent<AudioClip>();
     }
 
     void Update()
@@ -55,10 +58,11 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         Climb();
+        Shot();
 
         if (this.HP <= 0) 
-        { 
-        
+        {
+            SceneManager.LoadScene("GameOver");
         }
 
     }
@@ -146,19 +150,25 @@ public class PlayerMove : MonoBehaviour
            }
     }
 
-    void Shoot() 
-    {
-
-
-       
-        if (Input.GetKeyDown(KeyCode.Return)) 
+    void Shot() 
+    {       if (Input.GetKeyDown(KeyCode.Return)) 
         {
             audioSource.PlayOneShot(FiringSound);
             
         }
     }
 
-    
+
+    void GoldenPower() 
+    {
+        HP = MaxHP;
+        if (HP >= MaxHP) HP = MaxHP;
+        jumpPower *= 2;
+        moveSpeed *= 2;
+        AttackPower *= 2;
+    }
+
+
 
     // 地面判定
     void OnCollisionEnter2D(Collision2D collision)
@@ -191,6 +201,18 @@ public class PlayerMove : MonoBehaviour
             {
                 damageCoroutine = StartCoroutine(DamageLoop());
             }
+        }
+
+        if (collision.CompareTag("Apple")) 
+        {
+            if (HP < MaxHP) HP += 8;
+            Destroy(collision.gameObject);
+            if (HP >= MaxHP) HP = MaxHP;
+        }
+
+        if (collision.CompareTag("GoldenApple")) 
+        { 
+        
         }
     }
 
