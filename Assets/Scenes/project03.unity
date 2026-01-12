@@ -364,7 +364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   moveSpeed: 10
   jumpPower: 10
-  AttackPower: 10
   climbSpeed: 4
   HP: 30
   MaxHP: 0
@@ -887,7 +886,7 @@ Transform:
   m_GameObject: {fileID: 491336369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.58, y: 7.16, z: 0}
+  m_LocalPosition: {x: 3.5, y: 7.16, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1445,7 +1444,7 @@ GameObject:
   - component: {fileID: 1351908176}
   - component: {fileID: 1351908175}
   - component: {fileID: 1351908177}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: "\u68AF\u5B50"
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -1743,7 +1742,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58, y: -37}
+  m_AnchoredPosition: {x: -63, y: -12}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1896636972
@@ -1995,7 +1994,6 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
-  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

@@ -1,60 +1,51 @@
-//using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
-
-
-
-//状態の遷移はAnimatorの中の矢印。
 public class PlayerMove : MonoBehaviour
 {
+    // ===== 基本パラメータ =====
     public float moveSpeed = 10f;
     public float jumpPower = 10f;
-    public float AttackPower = 10f;
     public float climbSpeed = 4f;
+
+    // ===== HP関係 =====
     public float HP = 30;
     public float MaxHP;
     public float damageInterval = 2f;
-    public Collider2D collider2D;
-
-    private Rigidbody2D rb;
-    private bool isGrounded;
-    private bool isClimbing;
-    private float defaultGravity;
-    private bool isOnLadder;
     public Image HPBar;
-    private bool isDamage = false;
-    private bool isDamageCooldown = false;
-    private bool isTouchingToge = false;
-    private Coroutine damageCoroutine;
-    
 
-    SpriteRenderer sprite;
-    private Animator anim;
-
-    //武器関係
+    // ===== 武器関係 =====
     public GameObject Bullet;
-    public float BulletSpeed = 50;
-    AudioSource audioSource;
+    public float BulletSpeed = 50f;
     public AudioClip FiringSound;
 
-    
+    // ===== 内部変数 =====
+    private Rigidbody2D rb;
+    private Animator anim;
+    private AudioSource audioSource;
 
-    //public GameObject bulletPrefab; // インスペクターで弾のプレハブを割り当て
-    //public Transform firePoint;    // 弾の発射位置（銃口など）
+    private bool isGrounded = false;
+    private bool isOnLadder = false;   // 梯子に触れている
+    private bool isClimbing = false;   // 実際に登っている
+
+    private float defaultGravity;
+
+    // ダメージ関係
+    private bool isTouchingToge = false;
+    private Coroutine damageCoroutine;
+
+    // =========================
 
     void Start()
     {
-        MaxHP = HP;
         rb = GetComponent<Rigidbody2D>();
-        defaultGravity = rb.gravityScale;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        FiringSound = GetComponent<AudioClip>();
-        collider2D = GetComponent<Collider2D>();
+
+        MaxHP = HP;
+        defaultGravity = rb.gravityScale;
     }
 
     void Update()
@@ -63,140 +54,124 @@ public class PlayerMove : MonoBehaviour
         Jump();
         Climb();
         Shot();
+        UpdateHP();
 
-        if (this.HP <= 0) 
+        if (HP <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
-
-        
-
-
     }
 
+    // ===== 移動 =====
     void Move()
     {
-
-        HP = Mathf.Max(HP, 0); // HPが0未満にならない
-        HPBar.fillAmount = HP / MaxHP;
-        if (HP >= MaxHP) HP = MaxHP;
-        // 入力取得（A/D）
         float x = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetKey(KeyCode.A))
-            x = -1f;
-        if (Input.GetKey(KeyCode.D))
-            x = 1f;
 
         rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
 
-        if(x != 0)
+        if (x != 0)
         {
             anim.SetBool("isRunning", true);
-
-            // 向き変更
-            transform.localScale = new Vector3(
-                Mathf.Sign(x), 1, 1
-            );
+            transform.localScale = new Vector3(Mathf.Sign(x), 1, 1);
         }
-
         else
         {
             anim.SetBool("isRunning", false);
         }
-
-        
-
     }
 
+    // ===== ジャンプ =====
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isClimbing)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-            isGrounded = false; // ← 1回ジャンプ制御
+            isGrounded = false;
             anim.SetBool("isJumping00", true);
         }
-        else anim.SetBool("isJumping00", false);
+
+        if (isGrounded)
+        {
+            anim.SetBool("isJumping00", false);
+        }
     }
 
+    // ===== 梯子処理 =====
     void Climb()
     {
-        // 梯子に触れていて、上下キーを押したら登り状態にする
-        if (isOnLadder && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
+        if (isOnLadder)
         {
-            //isClimbing = true;
-            rb.gravityScale = 0f;
-            float y = 0f;
+            float y = Input.GetAxisRaw("Vertical");
 
-            if (Input.GetKey(KeyCode.W))
-                y = 1f;
-            if (Input.GetKey(KeyCode.S))
-                y = -1f;
-
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, y * climbSpeed);
-            anim.SetBool("isClimbing", true);
+            if (y != 0)
+            {
+                isClimbing = true;
+                rb.gravityScale = 0f;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, y * climbSpeed);
+                anim.SetBool("isClimbing", true);
+            }
+            else
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+                anim.SetBool("isClimbing", false);
+            }
         }
-
-        else anim.SetBool("isClimbing",false);
     }
 
-    void TogeDamage() 
+    // ===== 攻撃 =====
+    void Shot()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            audioSource.PlayOneShot(FiringSound);
+        }
+    }
+
+    // ===== HP表示 =====
+    void UpdateHP()
+    {
+        HP = Mathf.Clamp(HP, 0, MaxHP);
+        HPBar.fillAmount = HP / MaxHP;
+    }
+
+    // ===== トゲダメージ =====
+    void TogeDamage()
     {
         HP -= 5;
-        HP = Mathf.Max(HP, 0); // HPが0未満にならない
-       // HPBar.fillAmount = HP / MaxHP;
         anim.SetBool("isDamage", true);
-
     }
 
-    IEnumerator DamageLoop() 
+    IEnumerator DamageLoop()
     {
         TogeDamage();
+
         while (isTouchingToge)
         {
             yield return new WaitForSeconds(damageInterval);
-
-            if (isTouchingToge) TogeDamage();
-            //else anim.SetBool("isDamage",false);
-            
-           }
-    }
-
-    void Shot() 
-    {       if (Input.GetKeyDown(KeyCode.J)) 
-        {
-            audioSource.PlayOneShot(FiringSound);
-            
+            if (isTouchingToge)
+            {
+                TogeDamage();
+            }
         }
     }
 
-
-   
-
-
-
-    // 地面判定
+    // ===== 地面判定 =====
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && !isClimbing)
         {
             isGrounded = true;
         }
-
-        
-       // else if (!(collision.gameObject.tag == "Toge")) anim.SetBool("isDamage", false);
     }
 
-
+    // ===== Trigger処理 =====
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
-            isClimbing = true;
+            isOnLadder = true;
             rb.gravityScale = 0f;
             rb.linearVelocity = Vector2.zero;
-            isOnLadder = true;
         }
 
         if (collision.CompareTag("Toge"))
@@ -211,31 +186,25 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.CompareTag("Apple"))
         {
-            if (HP < MaxHP) HP += 10;
+            HP += 10;
             Destroy(collision.gameObject);
-
-
         }
 
-        if (collision.CompareTag("GoldenApple")) 
-        { 
+        if (collision.CompareTag("GoldenApple"))
+        {
             HP = MaxHP;
             Destroy(collision.gameObject);
         }
-
-     
-
     }
-
-
 
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
+            isOnLadder = false;
             isClimbing = false;
             rb.gravityScale = defaultGravity;
-            isOnLadder = false;
+            anim.SetBool("isClimbing", false);
         }
 
         if (collision.CompareTag("Toge"))
@@ -250,14 +219,4 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
-
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-    
-    }
-
-   
-
-    
 }
