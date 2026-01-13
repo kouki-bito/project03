@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5269252485453782715}
   - component: {fileID: 8642158695800437727}
   - component: {fileID: 8898401489065743376}
-  - component: {fileID: 8708545458761436095}
+  - component: {fileID: 3396718104636950216}
   m_Layer: 0
   m_Name: 'bullet '
   m_TagString: 'PlayerBullet '
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.4056604, g: 0.38843897, b: 0.38843897, a: 1}
+  m_Color: {r: 0.9716981, g: 0.47524446, b: 0.01375042, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,7 +156,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8708545458761436095
+--- !u!114 &3396718104636950216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,4 +168,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4050a96d2131954689d5faade9497d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  speed: 10
+  speed: 50

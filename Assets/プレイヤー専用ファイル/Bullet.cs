@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 50f;
+    private int direction = 1; // 1:右, -1:左
+
+    // 発射時に呼ばれる
+    public void SetDirection(int dir)
+    {
+        direction = dir;
+    }
 
     void Update()
     {
-        // 右方向へ移動
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * speed * direction * Time.deltaTime);
     }
 
-    // 画面外に出たら削除
     void OnBecameInvisible()
     {
         Destroy(gameObject);

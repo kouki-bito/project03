@@ -55,7 +55,7 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         Climb();
-        Shot();
+        if (Input.GetKeyDown(KeyCode.Return)) Shot();
         UpdateHP();
 
         if (HP <= 0)
@@ -123,12 +123,21 @@ public class PlayerMove : MonoBehaviour
     // ===== 攻撃 =====
     void Shot()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            
-            Instantiate(Bullet,firePoint.position,firePoint.rotation);
-            audioSource.PlayOneShot(FiringSound);
-        }
+        // プレイヤーの向きを取得
+        int dir = transform.localScale.x > 0 ? 1 : -1;
+
+        // 弾を生成
+        GameObject bullet = Instantiate(
+            Bullet,
+            firePoint.position,
+            Quaternion.identity
+        );
+
+        // 弾に向きを渡す
+        bullet.GetComponent<Bullet>().SetDirection(dir);
+
+        // 効果音
+        audioSource.PlayOneShot(FiringSound);
     }
 
     // ===== HP表示 =====
