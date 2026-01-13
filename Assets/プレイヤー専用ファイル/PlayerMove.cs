@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 10f;
     public float jumpPower = 10f;
     public float climbSpeed = 4f;
+    public float attackpower = 5f;
 
     // ===== HP関係 =====
     public float HP = 30;
@@ -19,7 +20,8 @@ public class PlayerMove : MonoBehaviour
     // ===== 武器関係 =====
     public GameObject Bullet;
     public float BulletSpeed = 50f;
-    public AudioClip FiringSound;
+    public AudioClip FiringSound; //発射音
+    public Transform firePoint;        // 発射位置
 
     // ===== 内部変数 =====
     private Rigidbody2D rb;
@@ -121,8 +123,10 @@ public class PlayerMove : MonoBehaviour
     // ===== 攻撃 =====
     void Shot()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
+            
+            Instantiate(Bullet,firePoint.position,firePoint.rotation);
             audioSource.PlayOneShot(FiringSound);
         }
     }
