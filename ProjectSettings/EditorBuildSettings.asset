@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Title.unity
     guid: eeb0a9a213241c74387df303c80c04b8
   - enabled: 1
+    path: Assets/Scenes/project03.unity
+    guid: 9343eb560f70c5a42a8b9c3273eeabee
+  - enabled: 1
+    path: Assets/Scenes/stege_kohan.unity
+    guid: 755a32d3288bc3e4c8a51fcffb66c8a6
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 4c24f95970a951d4a8bcb570385607d6
   m_configObjects:
