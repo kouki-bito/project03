@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
     public float BulletSpeed = 50f;
     public AudioClip FiringSound; //発射音
     public Transform firePoint;        // 発射位置
-    private bool isShot = false;
+    private bool isShot = true;
 
     // ===== 内部変数 =====
     private Rigidbody2D rb;
@@ -162,7 +162,7 @@ public class PlayerMove : MonoBehaviour
     // ===== トゲダメージ =====
     void TogeDamage()
     {
-        HP -= 2;
+        HP -= 5;
         anim.SetBool("isDamage", true);
     }
 
