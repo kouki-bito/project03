@@ -12,6 +12,8 @@ TagManager:
   - Apple
   - GoldenApple
   - Enemy
+  - MidBoss
+  - LastBoss
   layers:
   - Default
   - TransparentFX

@@ -58,10 +58,14 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return)) Shot();
         UpdateHP();
 
+        
+
         if (HP <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
+
+
     }
 
     // ===== 移動 =====
@@ -150,9 +154,11 @@ public class PlayerMove : MonoBehaviour
     // ===== トゲダメージ =====
     void TogeDamage()
     {
-        HP -= 5;
+        HP -= 2;
         anim.SetBool("isDamage", true);
     }
+
+    
 
     IEnumerator DamageLoop()
     {
@@ -175,6 +181,25 @@ public class PlayerMove : MonoBehaviour
         {
             isGrounded = true;
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            HP -= 3;
+            anim.SetBool("isDamage", true);
+        }
+
+        if (collision.gameObject.CompareTag("MidBoss"))
+        {
+            HP -= 5;
+            anim.SetBool("isDamage", true);
+        }
+
+        if (collision.gameObject.CompareTag("LastBoss"))
+
+        {
+            HP -= 10;
+            anim.SetBool("isDamage", true);
+        }
+
     }
 
     // ===== Trigger処理 =====
@@ -208,6 +233,8 @@ public class PlayerMove : MonoBehaviour
             HP = MaxHP;
             Destroy(collision.gameObject);
         }
+
+        
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -231,5 +258,13 @@ public class PlayerMove : MonoBehaviour
                 damageCoroutine = null;
             }
         }
+
+        
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("MidBoss") || collision.gameObject.CompareTag("LastBoss"))
+            anim.SetBool("isDamage", false);
     }
 }
