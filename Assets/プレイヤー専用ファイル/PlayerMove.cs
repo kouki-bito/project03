@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 10f;
     public float jumpPower = 10f;
     public float climbSpeed = 4f;
-    public float attackpower = 5f;
+    //public float attackpower = 5f;
 
     // ===== HP関係 =====
     public float HP = 30;
