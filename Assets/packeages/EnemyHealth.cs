@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[SelectionBase]
 public class EnemyHealth : MonoBehaviour
 {
     [Header("ステータス")]
