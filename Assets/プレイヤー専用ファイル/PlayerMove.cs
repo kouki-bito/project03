@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     public float BulletSpeed = 50f;
     public AudioClip FiringSound; //発射音
     public Transform firePoint;        // 発射位置
+    private bool isShot = false;
 
     // ===== 内部変数 =====
     private Rigidbody2D rb;
@@ -55,7 +56,10 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         Climb();
-        if (Input.GetKeyDown(KeyCode.Return)) Shot();
+        if (Input.GetKeyDown(KeyCode.Return) && isShot)
+        {
+            StartCoroutine(AttackInterval());
+        }
         UpdateHP();
 
         
@@ -127,21 +131,25 @@ public class PlayerMove : MonoBehaviour
     // ===== 攻撃 =====
     void Shot()
     {
-        // プレイヤーの向きを取得
-        int dir = transform.localScale.x > 0 ? 1 : -1;
+       
+            isShot = true;
+            // プレイヤーの向きを取得
+            int dir = transform.localScale.x > 0 ? 1 : -1;
 
-        // 弾を生成
-        GameObject bullet = Instantiate(
-            Bullet,
-            firePoint.position,
-            Quaternion.identity
-        );
+            // 弾を生成
+            GameObject bullet = Instantiate(
+                Bullet,
+                firePoint.position,
+                Quaternion.identity
+            );
 
-        // 弾に向きを渡す
-        bullet.GetComponent<Bullet>().SetDirection(dir);
+            // 弾に向きを渡す
+            bullet.GetComponent<Bullet>().SetDirection(dir);
 
-        // 効果音
-        audioSource.PlayOneShot(FiringSound);
+            // 効果音
+            audioSource.PlayOneShot(FiringSound);
+           
+        
     }
 
     // ===== HP表示 =====
@@ -158,7 +166,15 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("isDamage", true);
     }
 
-    
+    IEnumerator AttackInterval() 
+    {
+        isShot = false;
+            Shot();
+                yield return new WaitForSeconds(5f);
+                isShot = true;
+            
+        
+    }
 
     IEnumerator DamageLoop()
     {
