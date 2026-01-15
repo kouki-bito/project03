@@ -199,6 +199,7 @@ public class PlayerMove : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("衝突");
             HP -= 3;
             anim.SetBool("isDamage", true);
         }
@@ -238,6 +239,16 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        if (collision.CompareTag("Enemy"))
+        {
+            Debug.Log("槍が刺さった！");
+            
+            HP -= 3; // ダメージ量（好きな数字でOK）
+            anim.SetBool("isDamage", true);
+            
+            // 刺さった槍を消す
+            Destroy(collision.gameObject);
+        }
         if (collision.CompareTag("Apple"))
         {
             HP += 10;
