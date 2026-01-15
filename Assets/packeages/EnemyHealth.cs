@@ -3,8 +3,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("ステータス")]
-    [SerializeField] private int maxHP = 1;
-    private int currentHP;
+    [SerializeField] public int maxHP = 1;
+    public int currentHP;
 
     void Start()
     {
@@ -58,6 +58,7 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("敵は倒れた！");
-        Destroy(this.gameObject);
+       
+        Destroy(this.gameObject,0.01f);
     }
 }

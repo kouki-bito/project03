@@ -43,25 +43,35 @@ public class PiranhaAim : MonoBehaviour
         else
         {
             // OFFの場合：Inspectorで設定された「Flip X」の状態をそのまま使う
-            // (右向き固定ならfalse、左向き固定ならtrueのまま)
+           
             isLeft = visualRenderer.flipX;
         }
 
         // 2. 上下の判定
         bool isAbove = playerTransform.position.y > (transform.position.y + heightThreshold);
 
+        // (前略)
+
         if (isAbove)
         {
             // --- 斜めモード ---
             visualRenderer.sprite = spriteDiag;
-            SetMuzzleAngle(isLeft ? 135 : 45);
+            
+            // 左(isLeft)なら 45度、右なら 135度
+            // (元々左向きの絵素材の場合、この設定で正しくなります)
+            SetMuzzleAngle(isLeft ? 45 : 135);
         }
         else
         {
             // --- 通常モード ---
             visualRenderer.sprite = spriteSide;
-            SetMuzzleAngle(isLeft ? 180 : 0);
+
+            // 左(isLeft)なら 0度、右なら 180度
+            // (0度でそのまま左を向くので、これでOKです)
+            SetMuzzleAngle(isLeft ? 0 : 180);
         }
+
+        // (後略)
     }
 
     void SetMuzzleAngle(float angleDeg)

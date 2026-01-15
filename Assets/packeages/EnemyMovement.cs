@@ -24,9 +24,7 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // ---------------------------------------------------------
-        // センサーの基準点を作る（足元・少し前）
-        // ---------------------------------------------------------
+       
         Vector2 startPos = (Vector2)transform.position;
         startPos.x += rayOffsetX * direction; // 前に出す
         startPos.y += rayOffsetY;             // ★ここで高さを下げる！
@@ -40,17 +38,14 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        // ---------------------------------------------------------
-        // 2. 壁チェック（目の前センサー）
-        // ---------------------------------------------------------
+        
         RaycastHit2D wallHit = Physics2D.Raycast(startPos, Vector2.right * direction, wallRayDistance, groundLayer);
 
         if (wallHit.collider != null)
         {
             GameObject hitObject = wallHit.collider.gameObject;
 
-            // 【重要】自分自身、または「Player」には反応しない！
-            // プレイヤーなら、壁だと思わずにそのまま突っ込む（移動処理へ進む）
+            
             if (hitObject == gameObject || hitObject.CompareTag("Player") || hitObject.CompareTag("PlayerBullet"))
             {
                 // 何もしない（スルーする）
