@@ -64,7 +64,7 @@ public class PlayerMove : MonoBehaviour
 
         
 
-        if (HP <= 0)
+        if (HP <= 0 ||gameObject.transform.position.y <= -170)
         {
             SceneManager.LoadScene("GameOver");
         }
