@@ -1,32 +1,32 @@
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class tama : MonoBehaviour
 {
-    [SerializeField] private float speed = 5.0f;
-    [SerializeField] private float lifeTime = 3.0f; // 3秒で自動消滅
+    [SerializeField] private float speed = 5.0f;    // 弾の速さ
+    [SerializeField] private float lifeTime = 3.0f; // 自然消滅までの時間
 
     void Start()
     {
-        // 撃たれた方向に飛んでいくように、右方向へ力を加える
+        // 生まれた瞬間の「右方向（transform.right）」へ飛んでいく
         GetComponent<Rigidbody2D>().linearVelocity = transform.right * speed;
         
-        // ずっと残り続けないように、時間で消す
+        // 時間が経ったら消す
         Destroy(gameObject, lifeTime);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // プレイヤーに当たったらダメージ（Player側の処理にお任せ）
+        // プレイヤーに当たったら
         if (collision.CompareTag("Player"))
         {
-            // ここに「プレイヤーにダメージを与える」処理を書く
-            // 例: collision.GetComponent<PlayerHealth>().TakeDamage(1);
-            Destroy(gameObject);
+            // ★ダメージ処理は削除しました
+            // プレイヤー側で感知してもらうために、自分（弾）だけ消す
+            Destroy(gameObject); 
         }
-        // 壁（Ground）に当たったら消える
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        // 地面（壁）に当たったら
+        else if (collision.CompareTag("Ground"))
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // 壁にめり込まないように消す
         }
     }
 }
