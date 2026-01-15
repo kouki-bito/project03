@@ -245,7 +245,6 @@ MonoBehaviour:
   moveSpeed: 10
   jumpPower: 15
   climbSpeed: 4
-  attackpower: 5
   HP: 30
   MaxHP: 0
   damageInterval: 2
