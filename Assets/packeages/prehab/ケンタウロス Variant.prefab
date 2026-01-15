@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u30B1\u30F3\u30BF\u30A6\u30ED\u30B9 Variant"
       objectReference: {fileID: 0}
+    - target: {fileID: 2828679001239041109, guid: 7274d1faee537234189d32b6933c1a8c, type: 3}
+      propertyPath: m_TagString
+      value: LastBoss
+      objectReference: {fileID: 0}
     - target: {fileID: 4241923717137691460, guid: 7274d1faee537234189d32b6933c1a8c, type: 3}
       propertyPath: m_Controller
       value: 

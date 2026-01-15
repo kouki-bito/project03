@@ -197,7 +197,7 @@ public class BossCentaur : MonoBehaviour
     // 技D: 強化手下の召喚
     IEnumerator SummonMinion()
     {
-        /
+    
         anim.SetTrigger("Attack"); 
 
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
