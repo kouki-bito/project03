@@ -290,6 +290,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1041559173634483194, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771533149382018961, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 114
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771533149382018961, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -187
+      objectReference: {fileID: 0}
     - target: {fileID: 3777887256525742874, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -370,6 +382,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4870661099715282946, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1347976573}
     - target: {fileID: 7698874320023007494, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -52458,6 +52474,10 @@ PrefabInstance:
       propertyPath: HPBar
       value: 
       objectReference: {fileID: 1906195988}
+    - target: {fileID: 8399419347040602902, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
+      propertyPath: jumpPower
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.2
