@@ -334,7 +334,6 @@ GameObject:
   - component: {fileID: 449877781}
   - component: {fileID: 449877780}
   - component: {fileID: 449877783}
-  - component: {fileID: 449877784}
   m_Layer: 0
   m_Name: Scene changer
   m_TagString: Untagged
@@ -455,7 +454,11 @@ Transform:
   m_GameObject: {fileID: 449877779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 303.8, y: -6.1, z: 0}
+=======
+  m_LocalPosition: {x: 311.5, y: 46.3, z: 0}
+>>>>>>> parent of 0afd3d6 (前半ステージ　完了)
   m_LocalScale: {x: 4.35, y: 4.35, z: 4.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -473,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd4ec6888a65f74a8511fbc3ad5259b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapSceneChange
+<<<<<<< HEAD
 --- !u!114 &449877784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c2b638c86ddac46a095943210c4288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Changestage_kouhan
+=======
+>>>>>>> parent of 0afd3d6 (前半ステージ　完了)
 --- !u!1001 &945061897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -552,6 +558,7 @@ PrefabInstance:
     - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
       propertyPath: m_Sprite
       value: 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       objectReference: {fileID: 2641644843968133699, guid: 68cbeaea62f67f84ba4da9fe51b16cf6, type: 3}
     - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
@@ -564,6 +571,9 @@ PrefabInstance:
       value: 0
 >>>>>>> Stashed changes
       objectReference: {fileID: 0}
+=======
+      objectReference: {fileID: 1004143736216211430, guid: 039d54edb422867458f23ec1fbe51a60, type: 3}
+>>>>>>> parent of 0afd3d6 (前半ステージ　完了)
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51628,6 +51638,7 @@ PrefabInstance:
     - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
       propertyPath: m_Sprite
       value: 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       objectReference: {fileID: 2641644843968133699, guid: 68cbeaea62f67f84ba4da9fe51b16cf6, type: 3}
 =======
@@ -51644,6 +51655,12 @@ PrefabInstance:
 =======
       value: 0
 >>>>>>> Stashed changes
+=======
+      objectReference: {fileID: 3640276035326142965, guid: e1700b5d0968e7e4d9e97752189b7d30, type: 3}
+    - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+>>>>>>> parent of 0afd3d6 (前半ステージ　完了)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51672,11 +51689,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: -33.2
       objectReference: {fileID: 0}
     - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
       propertyPath: m_LocalPosition.y
       value: 32.5
+=======
+      value: 255.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.6
+>>>>>>> parent of 0afd3d6 (前半ステージ　完了)
       objectReference: {fileID: 0}
     - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
       propertyPath: m_LocalPosition.z
