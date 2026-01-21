@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7932386914725463976, guid: 7274d1faee537234189d32b6933c1a8c, type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7932386914725463976, guid: 7274d1faee537234189d32b6933c1a8c, type: 3}
       propertyPath: m_Size.x
@@ -153,6 +153,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2828679001239041109, guid: 7274d1faee537234189d32b6933c1a8c, type: 3}
   m_PrefabInstance: {fileID: 5739737207624684614}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+--- !u!114 &8372657033779482375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558966540456583187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb2eabc940341249baa54bb3269e057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
+  spriteSide: {fileID: -628981570938182407, guid: bb6ea554b4a2c1c4ea26ee04ebad173d, type: 3}
+  spriteDiag: {fileID: 4505943177511634371, guid: 6d39c8f2ff9bc164e8255cc516a68dd5, type: 3}
+  firePoint: {fileID: 4975280051568431360}
+  enableFlip: 0
+  heightThreshold: 2
+  originalSpriteIsLeft: 1
+>>>>>>> Stashed changes
 --- !u!114 &8851999161668579463
 MonoBehaviour:
   m_ObjectHideFlags: 0

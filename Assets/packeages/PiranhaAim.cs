@@ -33,7 +33,11 @@ public class PiranhaAim : MonoBehaviour
 
         // 1. 左右の判定（isLeft が true なら「左にいる」）
         bool isLeft;
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
         
         if (enableFlip)
         {
@@ -77,6 +81,10 @@ public class PiranhaAim : MonoBehaviour
             // ★修正ポイント：左なら180度、右なら0度
             SetMuzzleAngle(isLeft ? 180 : 0);
         }
+<<<<<<< Updated upstream
+=======
+        Debug.Log("Left? : " + isLeft);
+>>>>>>> Stashed changes
     }
 
     void SetMuzzleAngle(float angleDeg)
