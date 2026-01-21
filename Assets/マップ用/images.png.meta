@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 68cbeaea62f67f84ba4da9fe51b16cf6
+guid: 36add9c933f78c94ca6c6d4365b10754
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2641644843968133699
-    second: 4hashigo_0
+      213: 8957324059118975939
+    second: images_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,9 +40,9 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 4hashigo_0
+      name: images_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 240
-        height: 960
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+        width: 177
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34a76735df109a420800000000000000
-      internalID: 2641644843968133699
+      spriteID: 3cbb8d916cece4c70800000000000000
+      internalID: 8957324059118975939
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9070417315006484aa997171ef10a98e
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      4hashigo_0: 2641644843968133699
+      images_0: 8957324059118975939
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
