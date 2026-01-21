@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   moveSpeed: 10
-  jumpPower: 10
+  jumpPower: 20
   climbSpeed: 4
   HP: 30
   MaxHP: 0
