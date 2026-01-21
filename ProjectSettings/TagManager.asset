@@ -21,9 +21,9 @@ TagManager:
   - Ladder
   - Water
   - UI
-  - 
-  - 
-  - 
+  - ground
+  - enemy
+  - player
   - 
   - 
   - 

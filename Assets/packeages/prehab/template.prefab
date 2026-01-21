@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHP: 1
+  currentHP: 0
 --- !u!1 &8895900616147418241
 GameObject:
   m_ObjectHideFlags: 0
