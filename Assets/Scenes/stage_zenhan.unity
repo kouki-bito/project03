@@ -552,7 +552,11 @@ PrefabInstance:
     - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1004143736216211430, guid: 039d54edb422867458f23ec1fbe51a60, type: 3}
+      objectReference: {fileID: 2641644843968133699, guid: 68cbeaea62f67f84ba4da9fe51b16cf6, type: 3}
+    - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51617,10 +51621,14 @@ PrefabInstance:
     - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 3640276035326142965, guid: e1700b5d0968e7e4d9e97752189b7d30, type: 3}
+      objectReference: {fileID: 2641644843968133699, guid: 68cbeaea62f67f84ba4da9fe51b16cf6, type: 3}
     - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5786245516256172806, guid: dc80c1ba8a6e01f4693067713fd1b8cb, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
