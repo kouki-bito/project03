@@ -172,6 +172,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1041559173634483194, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771533149382018961, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 109
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771533149382018961, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -181
+      objectReference: {fileID: 0}
     - target: {fileID: 3777887256525742874, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -252,6 +264,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4870661099715282946, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1347976573}
     - target: {fileID: 7698874320023007494, guid: 9ffe2f0ad93ce6143818aa2f98aca7bd, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -318,6 +334,7 @@ GameObject:
   - component: {fileID: 449877781}
   - component: {fileID: 449877780}
   - component: {fileID: 449877783}
+  - component: {fileID: 449877784}
   m_Layer: 0
   m_Name: Scene changer
   m_TagString: Untagged
@@ -355,7 +372,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -451,11 +468,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449877779}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9165da78af76284dbc2bddf20de98e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fd4ec6888a65f74a8511fbc3ad5259b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapSceneChange
+--- !u!114 &449877784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449877779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c2b638c86ddac46a095943210c4288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Changestage_kouhan
 --- !u!1001 &945061897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51616,11 +51645,11 @@ PrefabInstance:
       objectReference: {fileID: 1906195988}
     - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 255.5
+      value: -33.2
       objectReference: {fileID: 0}
     - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.6
+      value: 32.5
       objectReference: {fileID: 0}
     - target: {fileID: 8658367821297734196, guid: 69e7cfb2a3613844b8e61ee39ca88b46, type: 3}
       propertyPath: m_LocalPosition.z
