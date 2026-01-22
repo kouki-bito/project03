@@ -1,10 +1,16 @@
 using UnityEngine;
+
 [SelectionBase]
 public class EnemyHealth : MonoBehaviour
 {
     [Header("ステータス")]
     [SerializeField] public int maxHP = 1;
     public int currentHP;
+
+    [Header("設定")]
+    // ★追加：これがONなら死んだらすぐ消える（雑魚用）
+    // OFFなら消えない（ボス用。演出はボス側のスクリプトに任せる）
+    [SerializeField] private bool destroyOnDeath = true; 
 
     void Start()
     {
@@ -14,13 +20,11 @@ public class EnemyHealth : MonoBehaviour
     // Trigger（すり抜け）モード
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // 念のためログ出し
-        Debug.Log("接触(Trigger): " + collision.tag);
+        // Debug.Log("接触(Trigger): " + collision.tag);
 
-        // ★修正：Containsを使うことで、後ろにスペースが入っていても反応させる
         if (collision.tag.Contains("PlayerBullet"))
         {
-            Hit(); // 共通のヒット処理へ
+            Hit(); 
             Destroy(collision.gameObject); // 弾を消す
         }
     }
@@ -28,21 +32,18 @@ public class EnemyHealth : MonoBehaviour
     // Collision（衝突）モード
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 念のためログ出し
-        Debug.Log("接触(Collision): " + collision.gameObject.tag);
+        // Debug.Log("接触(Collision): " + collision.gameObject.tag);
 
-        // ★修正：Containsを使う
         if (collision.gameObject.tag.Contains("PlayerBullet"))
         {
-            Hit(); // 共通のヒット処理へ
+            Hit(); 
             Destroy(collision.gameObject);
         }
     }
 
-    // ヒット時の処理をまとめました
     void Hit()
     {
-        Debug.Log("命中！ダメージ処理を実行");
+        // Debug.Log("命中！ダメージ処理を実行");
         TakeDamage(1);
     }
 
@@ -57,8 +58,14 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("敵は倒れた！");
-       
-        Destroy(this.gameObject,0.01f);
+        Debug.Log("HPが0になった！");
+
+        // ★ここが重要！
+        // 「死んだら破壊する設定」になっている時だけ消す。
+        // ボスはこの設定をOFFにするので、ここでは消されずに生き残る！
+        if (destroyOnDeath)
+        {
+            Destroy(this.gameObject, 0.01f);
+        }
     }
 }
