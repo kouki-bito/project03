@@ -9,6 +9,11 @@ TagManager:
   - Ladder
   - Toge
   - 'PlayerBullet '
+  - Apple
+  - GoldenApple
+  - Enemy
+  - MidBoss
+  - LastBoss
   layers:
   - Default
   - TransparentFX
@@ -16,9 +21,9 @@ TagManager:
   - Ladder
   - Water
   - UI
-  - 
-  - 
-  - 
+  - ground
+  - enemy
+  - player
   - 
   - 
   - 
